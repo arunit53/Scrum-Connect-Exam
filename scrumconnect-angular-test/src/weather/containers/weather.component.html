@@ -1,0 +1,5 @@
+
+<div class="container">
+  <app-search (emitCitySearched)="citySearch($event)"></app-search>
+  <app-results [list]="cityWeatherList" [serviceStatus]="serviceStatus"> </app-results> 
+</div>
