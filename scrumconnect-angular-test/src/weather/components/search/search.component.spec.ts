@@ -31,13 +31,14 @@ describe('SearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit an event when search button is clicked ', () => {
-    const comp = new SearchComponent();
-    const searchCityName = 'London';
-    comp.emitCitySearched.pipe(first()).subscribe(cityName => {
-      expect(cityName).toEqual(searchCityName);
-    });
-    comp.search(new MouseEvent('click'));
+  it('should emit city name on button click', () => {
+    component.searchCityName = 'London';
+    spyOn(component.emitCitySearched, 'emit');
+    const nativeElement = fixture.nativeElement;
+    const button = nativeElement.querySelector('.btn-search');
+    button.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+    expect(component.emitCitySearched.emit).toHaveBeenCalledWith('London');
   });
 
 });
